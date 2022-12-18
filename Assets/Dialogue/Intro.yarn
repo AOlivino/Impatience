@@ -1,0 +1,166 @@
+﻿title: Intro
+tags:
+position: -278,-195
+---
+<<fadeout BlackBox>>
+<<spriteout ElisenVN>>
+Press Space to progress. Press Z to talk to NPCs or rest (when in the fields).
+Elisen: Ugh... #line:082f92b 
+<<spritein ElisenVN>>
+Your name is Elisen Netyoive, a half-elven adventurer who left your home in search of fame and glory.  #line:0bd9715 
+For a few wonderful years, you travelled the lands of Skiydrem, slaying orcs and exploring the lands, drinking with bards and fighting dragons (small dragons, more like wyrms, frankly). #line:0d6b84e 
+But then you took an arrow to the knee. #line:0f28379 
+Fortunately, your half-elvish blood meant such an injury wouldn't keep you down forever.  #line:0390121 
+Enough daily healing spells will restore your bad knee, but for now, you can't travel too far lest you collapse and strand yourself somewhere dangerous.  #line:043d8e8 
+Now you're stranded in the human town of Ballaeter, full of rich snobs obsessed with their gold and their beauty.  #line:01f791e 
+Worse off, you just spent all your gold on a fancy new bow, only to find it stolen in the middle of the night! #line:0070866 
+The people of Ballaeter look down upon your half-elven kind thorugh upturned noses and scoffs, discreet whispers and stares at your pointed ears.  #line:04c1691 
+<<changeto_pissed ElisenVN>>
+It makes your blood boil everytime you see them riding one of their fancy carriages, gaping at the sight of your ragged clothes and worn expression.  #line:02d22e6 
+Had you been at the peak of health, you could easily draw your sword and slit their pale throats, teach them not to fool with a seasoned adventurer like yourself. #line:02b1df1 
+Alas, that was a poor move with a bad knee. So you dealt with their prejudice with as much grace as you can muster.  #line:0128eab 
+<<changeto_annoyed ElisenVN>>
+Elisen: I can't wait to get out of here. #line:0c69e3d 
+<<jump Beautyparlor_start>>
+===
+title: Beautyparlor_start
+position: -45,-186
+---
+To pass time and earn back the money you lost, you worked as a makeup artist.  #line:04c65c2 
+It's an agnozingly slow job that required a lot of patience.  #line:02097b5 
+Patience with your prejudiced employeer. Patience with the snotty customers. Patience with applying the makeup. #line:034db91 
+<<changeto_pissed ElisenVN>>
+Patience you simply did not have. #line:0fe952e 
+<<changeto_neutral ElisenVN>>
+Still, you were good at it and the staff was shorthanded, so they hired you and paid you well enough.  #line:036732d 
+Not nearly as much as you'd earn if you were completely human, you suspect, but it was enough to save up for your next adventure.  #line:073424a 
+<<spriteout ElisenVN>>
+<<toparlor>>
+<<jump Beautyparlor>>
+<<fadein BlackBox>>
+===
+title: Beautyparlor
+position: -199,-92
+---
+<<spriteout ElisenVN>>
+<<fadeout BlackBox>>
+<<set $sanity to 10>>
+<<set $SNAP to false>>
+Elisen: I better get to work. #line:01f3d24 
+Elisen: Or maybe I can get money doing something else...? #line:08e7792 
+Elisen: I'll try to save at least 750 gold working here, and then I can leave...
+<<if $AttackMode is true>>
+Elisen: I should PROBABLY put this away first. #line:03c2aba 
+<<endif>>
+<<jump Stop>>
+===
+
+title: Work
+position: 33,-61
+---
+You apply {randomizemakeup1()} {randomizemakeup2()} onto a {randomizemakeup3()} lady. #line:0ab1af7 
+"{randomizemakeup4()}" She says.
+<<set $sanity -= 1>>
+You get paid for the day. #line:0b6a076 
+<<if $sanity < 5>>
+You're not sure how much of this you can take.
+<<endif>>
+<<if $sanity < 3>>
+You feel like you're about to snap soon.
+<<endif>>
+<<if $sanity == 0>>
+<<jump SNAP>>
+<<endif>>
+<<fadein BlackBox>>
+<<earn Player>>
+<<dayend Player>>
+<<fadeout BlackBox>>
+<<jump Stop>>
+===
+title: Stop
+position: -154,14
+---
+===
+title: Scolding
+position: 40,38
+---
+Someone: Put that away, you animal! You'll hurt someone with that!
+<<attackend Player>>
+<<jump Stop>>
+===
+title: SNAP
+position: -181,91
+---
+<<spritein ElisenVN>>
+<<changeto_pissed ElisenVN>>
+<b>You had enough...</b>
+Just one more smart remark about "half-breeds" later, and...
+<<changeto_snap ElisenVN>>
+Elisen: <color=\#de0000> Oh that's IT!</color>!
+<<spriteout ElisenVN>>
+<<fadein BlackBox>>
+...
+<<playsword Player>>
+Woman: What are you doing!?
+<<playslash Player>>
+Woman: AAAAAAAAAAAGGHHH!
+<<playscream1 Player>>
+Customer: Stop! STOP!
+<<playslash Player>>
+<<playscream2 Player>>
+Woman: OH GODS!
+<<playsword Player>>
+<<playscream1 Player>>
+You stab and slash at everyone you see.
+<<playslash Player>>
+<<playscream2 Player>>
+Blood sprays across the walls, the mirrors, screaming ladies, your own clothes...
+...
+You were able to slaughter them all with ease. 
+Finally, standing amongst all the corpses, you laugh in satisfication and take your leave. 
+You can never come back here after what you've just did, for they will surely hang you for your slaughter... 
+But good riddance! 
+You'll never come back here again.
+<b>GAME OVER</b>
+<<resetgame>>
+===
+title: Victory
+position: 18,134
+---
+<<fadein BlackBox>>
+You probably have enough gold to be fine on your own now.
+Now you can afford to stay at a nice tavern, heal your knee, and move on.
+You decide to leave the lousy town of Ballaeter behind and continue your adventure.
+What else awaits you?
+<b>You win! Congratulations!</b>
+<<resetgame>>
+===
+title: Fields
+position: 12,186
+---
+Elisen: Perhaps I can get some cash killing all the monsters here?
+Elisen: Although right now, it seems to be just slimes and will-o-wisps.
+Elisen: This could take a while...
+<<jump Stop>>
+===
+title: Rest
+position: -251,231
+---
+Rest here?
+-> Yes 
+You set up your tent and rest for the day.
+<<fadein BlackBox>>
+<<rest Player>>
+<<dayend Player>>
+<<fadeout BlackBox>>
+<<set $sanity += 2>>
+<<jump Stop>>
+->No 
+<<jump Stop>>
+===
+title: Death
+position: -340,140
+---
+Looks like you died. Let's try again.
+<<resetgame>>
+===
